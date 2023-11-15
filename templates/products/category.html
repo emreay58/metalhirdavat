@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{category.seotitle|title}} | Metal Yapı Hırdavat{% endblock title %}
+{% block description %}{{category.seodescription}}{% endblock description %}
+{% block content %}
+		<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="breadcrumb-tree">
+							<li><a href="{% url "index" %}">Ana Sayfa</a></li>
+							<li class="active">{{category.name}}</li>
+						</ul>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /BREADCRUMB -->
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<!-- ASIDE -->
+					<div id="aside" class="col-md-3">
+						<!-- aside Widget -->
+						<div class="aside">
+							<h3 class="aside-title">KATEGORİLER</h3>
+							<div class="checkbox-filter">
+								<div class="input-checkbox">
+									<a href="{% url "products"%}" >Tüm Ürünler</a>
+								</div>
+								<div class="input-checkbox">
+									{% if 'hirdavat' in request.path %}<a href="{% url "altcategory" 'hirdavat' %}">Hırdavat</a>{% else %}<a href="{% url "altcategory" 'hirdavat' %}">Hırdavat</a>{% endif %}
+								</div>
+
+							{% for category in categories  %}
+								<div class="input-checkbox">
+									<a href="{% url "category" category.slug %}" >{{category.name|title}}</a>
+								</div>
+                            {% endfor %}
+							<div class="input-checkbox">
+								{% if 'matkap' in request.path %}<a href="{% url "altcategory" 'matkap-hilti' %}">Matkap-Hilti</a>{% else %}<a href="{% url "altcategory" 'matkap-hilti' %}">Matkap-Hilti</a>{% endif %}
+
+							</div>
+
+							</div>
+						</div>
+						<!-- /aside Widget -->
+
+						<!-- aside Widget -->
+						<div class="aside">
+							<h3 class="aside-title">MARKALAR</h3>
+							<div class="checkbox-filter">
+								{% for marka in markas  %}
+								<div class="input-checkbox">
+									<a href="{% url "marka" marka.slug %}">{{marka.name|upper}}</a>
+								</div>
+								{% endfor %}
+							</div>
+						</div>
+						<!-- /aside Widget -->
+
+						<!-- aside Widget -->
+						<div class="aside">
+							<h3 class="aside-title">Çok Satanlar</h3>
+							{% for cok_satan in cok_satans %}
+							<div class="product-widget">
+								<div class="product-img">
+									<img src="{{cok_satan.img.url}}" alt="">
+								</div>
+								<div class="product-body">
+									<p class="product-category">{{cok_satan.category}}</p>
+									<h3 class="product-name"><a href="{% url "product_detail" cok_satan.category.slug cok_satan.slug %}">{{cok_satan.title}}</a></h3>
+									{% if sale_price %}
+									<h4 class="product-price">{{cok_satan.sale_price}} <del class="product-old-price">{{cok_satan.price}}</del></h4>
+									{% else %}
+									<h4 class="product-price">{{cok_satan.price}}</h4>
+									{% endif %}
+								</div>
+							</div>
+							{% endfor %}
+						</div>
+						<!-- /aside Widget -->
+					</div>
+					<!-- /ASIDE -->
+
+					<!-- STORE -->
+					<div id="store" class="col-md-9">
+						<!-- store products -->
+						<div class="row">
+							{% if products %}
+								{% for product in products  %}
+								<!-- product -->
+								<div class="col-md-4 col-xs-6">
+									<div class="product">
+										<div class="product-img">
+											<img src="{{product.img.url}}" alt="{{product.title}}">
+											<div class="product-label">
+												{% if product.indirimoran %}
+												<span class="sale">% {{product.indirimoran}} İndirim</span>
+												{% endif %}
+											</div>
+										</div>
+										<div class="product-body">
+											<p class="product-category">{{product.category}}</p>
+											<h3 class="product-name"><a href="{% url "product_detail" product.category.slug product.slug %}">{{product.title|title}}</a></h3>
+											{% if product.sale_price %}
+											<h4 class="product-price">₺ {{product.sale_price}} <del class="product-old-price">₺ {{product.price}}</del></h4>
+											{% else %}
+											<h4 class="product-price">₺ {{product.price}}</h4>
+											{% endif %}
+										</div>
+										<div class="add-to-cart">
+											<a href="{% url "product_detail" product.category.slug product.slug %}" class="add-to-cart-btn">İncele</a>
+										</div>
+									</div>
+								</div>
+								<!-- /product -->
+								{% endfor %}
+							{% else %}
+							<div class="alert alert-danger" role="alert">
+								Ürün Bulunamadı.
+							  </div>
+							{% endif %}
+						</div>
+						<!-- /store products -->
+
+						<!-- store bottom filter -->
+						<div class="store-filter clearfix">
+							<span class="store-qty">50 Adet ürün Gösterİlmektedir</span>
+							<ul class="store-pagination">
+								<li class="active">1</li>
+								<li><a href="#">2</a></li>
+								<li><a href="#">3</a></li>
+								<li><a href="#">4</a></li>
+								<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+							</ul>
+						</div>
+						<!-- /store bottom filter -->
+					</div>
+					<!-- /STORE -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+{% endblock content %}

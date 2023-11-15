@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}404 Sayfa bulanamadı hata sayfası{% endblock title %}
+{% block content %}
+<!-- NEWSLETTER -->
+<div id="newsletter" class="section">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="newsletter">
+                    <h1><strong>404 Hatası</strong></h1>
+          
+                    <p>Sayfa Bulunamadı</p>
+            
+                    <i class="fa fa-home"></i> <a href="{% url "index" %}"> Ana Sayfaya Dön</a>
+                
+                </div>
+            </div>
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /NEWSLETTER -->
+{% endblock content %}

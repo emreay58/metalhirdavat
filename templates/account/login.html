@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{% endblock title %}
+{% block content %}
+<div class="container"><br>
+  <div class="row">
+    <div class="col-sm-6">
+      <h1>Müşteri Girişi</h1><br>
+      {% if messages %}
+       {% for message in messages  %}
+
+        <div class="alert alert-danger" role="alert">
+          {{message}}
+        </div>
+        {% endfor %}
+      {% endif %}
+      <form method="POST">
+          {% csrf_token %}
+          <div class="mb-3">
+            <label class="form-label">Kullanıcı Adı</label>
+            <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
+          </div><br>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Parola</label>
+            <input type="password" class="form-control" name="password">
+          </div>
+          <div class="mb-3 form-check"><br>
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Beni Hatırla</label>
+          </div><br>
+          <button type="submit" class="btn btn-danger">Giriş Yap</button><br><br>
+        </form><br>
+      </div>
+  </div>
+</div>
+{% endblock content %}

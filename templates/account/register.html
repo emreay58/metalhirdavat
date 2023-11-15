@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{% endblock title %}
+{% block content %}
+{% if form.errors %}
+<p>Kayıt yapılamadı</p>
+{% endif %}
+<form action={% url "register" %} method='POST'>
+    {% csrf_token %}
+  
+    
+ 	<!-- SECTION -->
+     <div class="section">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <div class="col">
+                    <!-- Billing Details -->
+                    <div class="billing-details">
+                        <div class="section-title">
+                            <h3 class="title">Müşteri Oluştur</h3>
+                        </div>
+                        <form action="{% url "register" %}" method="POST">
+                            {% csrf_token %}
+                        <div class="form-group"> 
+                             {{form.as_p}}
+                        </div>
+                        <button type='submit' class="primary-btn order-submit">Oluştur</button>
+                    </form>
+                    </div>
+                    <!-- /Billing Details -->
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /SECTION -->
+</form>
+{% endblock content %}

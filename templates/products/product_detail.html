@@ -1,0 +1,317 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}{{product.seotitle|title}} | Metal Hırdavat{% endblock title %}
+{% block description %}{{product.seodescription}}{% endblock description %}
+{% block content %}
+		<!-- BREADCRUMB -->
+		<div id="breadcrumb" class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<div class="col-md-12">
+						<ul class="breadcrumb-tree">
+							<li><a href="{% url "index" %}">Ana Sayfa</a></li>
+							<li><a href="{% url "category" product.category.slug %}">{{product.category|title}}</a></li>
+							<li class="active">{{product.title|title}}</li>
+						</ul>
+					</div>
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /BREADCRUMB -->
+
+		<!-- SECTION -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+					<!-- Product main img -->
+					<div class="col-md-5 col-md-push-2">
+						<div id="product-main-img">
+							{% if product.img1 %}
+							<div class="product-preview">
+								<img src="{{product.img1.url}}" alt="{{product.title}}">
+							</div>
+							{% endif %}
+							{% if product.img2 %}
+							<div class="product-preview">
+								<img src="{{product.img2.url}}" alt="{{product.title}}">
+							</div>
+							{% endif %}
+							{% if product.img3 %}
+							<div class="product-preview">
+								<img src="{{product.img3.url}}" alt="{{product.title}}">
+							</div>
+							{% endif %}
+						</div>
+					</div>
+					<!-- /Product main img -->
+
+					<!-- Product thumb imgs -->
+					<div class="col-md-2  col-md-pull-5">
+						<div id="product-imgs">
+							{% if product.img1 %}
+							<div class="product-preview">
+								<img src="{{product.img1.url}}" alt="{{product.title}}">
+							</div>
+							{% endif %}
+							{% if product.img2 %}
+							<div class="product-preview">
+								<img src="{{product.img2.url}}" alt="{{product.title}}">
+							</div>
+							{% endif %}
+							{% if product.img3 %}
+							<div class="product-preview">
+								<img src="{{product.img3.url}}" alt="{{product.title}}">
+							</div>
+							{% endif %}
+						</div>
+					</div>
+					<!-- /Product thumb imgs -->
+
+					<!-- Product details -->
+					<div class="col-md-5">
+						<div class="product-details">
+							<ul class="product-links mt-4">
+								<li>Stok No:</li>
+								<span href=>{{product.stokno}}</span>
+							</ul><br>
+							<h2 class="product-name">{{product.title|title}}</h2>
+							<div>
+                                {% if product.sale_price %}
+                                <h4 class="product-price">₺ {{product.sale_price}} <del class="product-old-price">₺ {{product.price}}</del></h4>
+                                {% else %}
+                                <h4 class="product-price">₺ {{product.price}}</h4>
+                                {% endif %}
+								<span class="product-available">{% if product.stok > 1 %}<span class="text-succeess">Stokta Var<span>{% else %}<span class="text-danger">Stokta Yok<span>{% endif %}</span>
+							</div>
+							<p>{{product.description}}</p>
+							<div class="add-to-cart">
+								<div class="qty-label">
+								</div>
+								<a href="https://wa.me/905336833058" target="_blank" class="btn btn-success"><i class="fa fa-whatsapp" aria-hidden="true"></i>  WHATSAPP SİPARİŞİ</a>
+							</div>
+
+							<ul class="product-links">
+								<li>Kategori:</li>
+								<li><a href="{% url "category" product.category.slug %}">{{product.category|upper}}</a></li>
+							</ul>
+							<ul class="product-links">
+								<li>Marka:</li>
+								<a href="{% url "marka" product.marka.slug %}">{{product.marka|upper}}</a>
+							</ul><br>
+
+
+							<ul class="product-links">
+								<li>Sosyal Medya:</li>
+								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+								<li><a href="#"><i class="fa fa-envelope"></i></a></li>
+							</ul>
+
+						</div>
+					</div>
+					<!-- /Product details -->
+
+					<!-- Product tab -->
+					<div class="col-md-12">
+						<div id="product-tab">
+							<!-- product tab nav -->
+							<ul class="tab-nav">
+								<li class="active"><a data-toggle="tab" href="#tab1">AÇIKLAMA</a></li>
+								<li><a data-toggle="tab" href="#tab2">ÖLÇÜLER</a></li>
+								<li><a data-toggle="tab" href="#tab4">İADE KOŞULLARI</a></li>
+
+							</ul>
+							<!-- /product tab nav -->
+
+							<!-- product tab content -->
+							<div class="tab-content">
+								<!-- tab1  -->
+								<div id="tab1" class="tab-pane fade in active">
+									<div class="row">
+										<div class="col-md-12">
+											<p>{{product.urun_ayrinti|safe}}</p>
+										</div>
+									</div>
+								</div>
+								<!-- /tab1  -->
+
+								<!-- tab2  -->
+								<div id="tab2" class="tab-pane fade in">
+									<div class="row">
+										<div class="col-md-12">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                      <th scope="col">Uzunluk (cm)</th>
+                                                      <th scope="col">Genişlik (cm)</th>
+                                                      <th scope="col">Ağırlık (kg)</th>
+                                                      <th scope="col">Yükseklik (cm)</th>
+                                                      <th scope="col">Derinlik (cm)</th>
+                                                    </tr>
+                                                  </thead>
+                                                  <tbody>
+                                                    <tr>
+                                                      <th scope="row">{{product.uzunluk}}</th>
+                                                      <th >{{product.genislik}}</th>
+                                                      <th >{{product.agirlik}}</th>
+                                                      <th>{{product.boy}}</th>
+                                                      <th>{{product.derinlik}}</th>
+                                                    </tr>
+                                                  </tbody>
+                                              </table>
+										</div>
+									</div>
+								</div>
+								<!-- /tab2  -->
+								<div id="tab4" class="tab-pane fade in">
+									<div class="row">
+											<div class="col-md-12">
+												<p><strong>İade ve Değişim İşlemleri</strong></p>
+
+												<p><br />
+												Satın aldığınız &uuml;r&uuml;n / &uuml;r&uuml;nlere ilişkin teslimatın yapıldığı tarihten itibaren 30 g&uuml;n i&ccedil;erisinde iade talebinde bulunabilirsiniz.</p>
+												
+												<p>&nbsp;</p>
+												
+												<p><strong>ADIM ADIM KOLAY İADE S&Uuml;RECİ</strong>&nbsp;</p>
+												
+												<p>&nbsp;</p>
+												
+												<ol>
+												</ol>
+												
+												<p>&nbsp; &nbsp; 1-) &Uuml;ye girişi yaptıktan sonra, hesabım sayfasına gel &quot; siparişlerim &quot; men&uuml;s&uuml;ne gir ve iade etmek istediğin siparişin yanındaki &quot;iade et&quot; butonuna tıklayın</p>
+												
+												<p>&nbsp; &nbsp; 2-) Adres bilgilerini onaylayın</p>
+												
+												<p>&nbsp; &nbsp; 3-) İade / Değişim yapmak istediğiniz &uuml;r&uuml;n / &uuml;r&uuml;nleri se&ccedil;in</p>
+												
+												<p>&nbsp; &nbsp; 4- ) &Uuml;r&uuml;n&uuml;n iade nedenini se&ccedil;erek kısaca iade nedenini a&ccedil;ıkladıktan sonra formu kaydedin.</p>
+												
+												<p>&nbsp; &nbsp; 5-) İade talebini en kısa s&uuml;re i&ccedil;erisinde m&uuml;şteri hizmetleri ekibimiz tarafından incelenecek ve hem size g&ouml;nderilecek SMS mesajları hem de iade takibi sayfamızı kullanarak talebiniz ile ilgili &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;gelişmelerden&nbsp;&nbsp;haberdar&nbsp; olabileceksiniz.</p>
+												
+												<p>&nbsp; &nbsp; 6-) Talebiniz ekibimiz tarafından onaylandıktan sonra &uuml;r&uuml;n&uuml; g&ouml;ndermeniz gereken iade adresi veya iade g&ouml;nderi kodu size g&ouml;nderilecektir.</p>
+												
+												<p>&nbsp; &nbsp; 7-) İade adresine geri g&ouml;nderdiğiniz &uuml;r&uuml;n&uuml;n iadeye uygunluğu kontrol edilerek herhangi bir sorun g&ouml;r&uuml;lmediği taktirde iade işleminiz tamamlanacaktır. Aksi durumda &uuml;r&uuml;n / &uuml;r&uuml;nler adresinize geri &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;g&ouml;nderilecektir.</p>
+												
+												<ol>
+												</ol>
+												
+												<ol>
+												</ol>
+												
+												<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+												
+												<p>&nbsp;&nbsp;&nbsp;&nbsp;<strong>İade ve Değişim Hakkında Bilmeniz Gerekenler</strong></p>
+												
+												<p>&nbsp;</p>
+												
+												<ul>
+													<li>İadeler mutlak surette orijinal kutu/ambalajı ve faturası ile birlikte yapılmalıdır.</li>
+												</ul>
+												
+												<ul>
+													<li>B&uuml;t&uuml;n standart aksesuarları hasarsız ve tam olarak orijinal paketleri ile birlikte g&ouml;nderilmelidir.</li>
+												</ul>
+												
+												<ul>
+													<li>Demonte olarak g&ouml;nderilen &uuml;r&uuml;nlerin kurulumu yapıldıktan sonra değişim ve iade kapsamına girmemektedir.</li>
+												</ul>
+												
+												<ul>
+													<li>Kurulum gerektiren &uuml;r&uuml;nler mutlaka yetkili servis tarafından a&ccedil;ılmalı ve kurulumu yapılmalıdır. Yetkili servis dışında a&ccedil;ılan &uuml;r&uuml;nler garanti ve iade kapsamı dışında kalabilir. Servis kurulumu esnasında &uuml;r&uuml;nde sorun tespit edilirse tutanak ile değişim/iade işlemleri yapılabilir</li>
+												</ul>
+												
+												<ul>
+													<li>Hediye verilen promosyonlu, kampanyalı &uuml;r&uuml;nler de orijinal paketleri ile birlikte g&ouml;nderilmelidir.</li>
+												</ul>
+												
+												<ul>
+													<li>T&uuml;keticinin &ouml;zel istekleri veya a&ccedil;ık&ccedil;a onun kişisel ihtiya&ccedil;ları doğrultusunda hazırlanan, niteliği itibariyle geri g&ouml;nderilmeye elverişli olmayan, &ccedil;abuk bozulma tehlikesi olan veya son kullanma tarihi ge&ccedil;me ihtimali olan &uuml;r&uuml;nler iade edilemez.</li>
+												</ul>
+												
+												<ul>
+													<li>Her t&uuml;rl&uuml; Kozmetik &Uuml;r&uuml;nler, ve Kişisel Bakım &Uuml;r&uuml;nleri, her t&uuml;rl&uuml; Elektronik &uuml;r&uuml;nlerin ve Kırtasiye sarf malzemelerin ancak ambalajları a&ccedil;ılmamış olması şartı ile iadesi kabul edilir. Ambalajı a&ccedil;ılan / kullanımı ger&ccedil;ekleşen elektronik &uuml;r&uuml;nlerin iadesi / değişimi i&ccedil;in yetkili servis raporu alınması gereklidir.</li>
+												</ul>
+												
+												<ul>
+													<li>Satın aldığınız &uuml;r&uuml;n&uuml;n arızalanması durumunda fatura ve garanti belgesi ile &uuml;r&uuml;n&uuml;n servisine doğrudan başvuruda bulunabilirsiniz. &Uuml;r&uuml;n&uuml;n<br />
+													garanti s&uuml;resi boyunca teknik servislerden &uuml;cretsiz destek alabilirsiniz.&nbsp; &nbsp;&nbsp;</li>
+												</ul>
+												
+												<ul>
+													<li>Detaylı bilgi i&ccedil;in&nbsp;<a href="https://www.tekzen.com.tr/lp/iade-proseduru">İade Prosed&uuml;r&uuml;</a>&nbsp;sayfamızı ziyaret edebilirsiniz.</li>
+												</ul>
+												
+											</div>
+										</div>
+									</div>
+									<!-- /tab2  -->
+							</div>
+							<!-- /product tab content  -->
+						</div>
+					</div>
+					<!-- /product tab -->
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /SECTION -->
+
+		<!-- Section -->
+		<div class="section">
+			<!-- container -->
+			<div class="container">
+				<!-- row -->
+				<div class="row">
+
+					<div class="col-md-12">
+						<div class="section-title text-center">
+							<h3 class="title">POPÜLER ÜRÜNLER</h3>
+						</div>
+					</div>
+                    {% for populer in populers  %}
+					<!-- product -->
+					<div class="col-md-2 col-xs-6">
+						<div class="product">
+							<div class="product-img">
+								<img src="{{populer.img.url}}" alt="">
+								<div class="product-label">
+									<span class="sale">-30%</span>
+								</div>
+							</div>
+							<div class="product-body">
+								<p class="product-category">{{populer.category}}</p>
+								<h3 class="product-name"><a href="{% url "product_detail" populer.category.slug populer.slug %}">{{populer.title|title}}</a></h3>
+                                {% if product.sale_price %}
+                                <h4 class="product-price">₺ {{populer.sale_price}}<del class="product-old-price"> ₺ {{populer.price}}</del></h4>
+                                {% else %}
+                                <h4 class="product-price">₺ {{populer.price}}</h4>
+                                {% endif %}                                <div class="product-rating">
+								</div>
+							</div>
+							<div class="add-to-cart">
+								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>SİPARİŞ VER</button>
+							</div>
+						</div>
+					</div>
+					<!-- /product -->
+                    {% endfor %}
+
+					<div class="clearfix visible-sm visible-xs"></div>
+
+				</div>
+				<!-- /row -->
+			</div>
+			<!-- /container -->
+		</div>
+		<!-- /Section -->
+{% endblock content %}

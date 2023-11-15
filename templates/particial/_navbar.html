@@ -1,0 +1,95 @@
+{% load static %}
+<!-- HEADER -->
+<header>
+    <!-- TOP HEADER -->
+    <div id="top-header">
+        <div class="container">
+            <ul class="header-links pull-left">
+                <li><a href="#"><i class="fa fa-phone"></i> 0216 444 0040</a></li>
+                <li><a href="#"><i class="fa fa-envelope-o"></i> info@metalyapihirdavat.com</a></li>
+                <li><a href="#"><i class="fa fa-map-marker"></i> Sultanbeyli </a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /TOP HEADER -->
+
+    <!-- MAIN HEADER -->
+    <div id="header">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <!-- LOGO -->
+                <div class="col-md-3">
+                    <div class="header-logo">
+                        <a href="{% url "index" %}" class="logo">
+                            <img src="{% static 'img/logo.png' %}" alt="">
+                        </a>
+                    </div>
+                </div>
+                <!-- /LOGO -->
+						<!-- SEARCH BAR -->
+						<div class="col-md-6">
+							<div class="header-search">
+								<form action="{% url "search" %}" method="POST">
+                                    {% csrf_token %}
+									<select class="input-select">
+										<option value="0">Tüm Kategori</option>
+										<option value="1">Bahçe-Yapı</option>
+										<option value="1">El Aletleri</option>
+                                        <option value="1">Hırdavat</option>
+									</select>
+									<input name="searched" class="input" placeholder="Ara...">
+									<button type="submit" class="search-btn">Ara</button>
+								</form>
+							</div>
+						</div>
+						<!-- /SEARCH BAR -->
+                <!-- ACCOUNT -->
+                <div class="col-md-3 clearfix">
+                    <div class="header-ctn">     
+                        <!-- Menu Toogle -->
+                        <div class="menu-toggle">
+                            <a href="#">
+                                <i class="fa fa-bars"></i>
+                                <span>Menu</span>
+                            </a>
+                        </div>
+                        <!-- /Menu Toogle -->
+                    </div>
+                </div>
+                <!-- /ACCOUNT -->
+            </div>
+            <!-- row -->
+        </div>
+        <!-- container -->
+    </div>
+    <!-- /MAIN HEADER -->
+</header>
+<!-- /HEADER -->
+
+<!-- NAVIGATION -->
+<nav id="navigation">
+    <!-- container -->
+    <div class="container">
+        <!-- responsive-nav -->
+        <div id="responsive-nav">
+            <!-- NAV -->
+            <ul class="main-nav nav navbar-nav">
+                {% if request.path == '/' %}<li class="active"><a href="{% url "index" %}">Ana Sayfa</a></li>{% else %}<li><a href="{% url "index" %}">Ana Sayfa</a>{% endif %}
+                {% if 'tum-urunler' in request.path %}<li class="active"><a href="{% url "products" %}">Tüm Ürünler</a></li>{% else %}<li><a href="{% url "products" %}">Tüm Ürünler</a></li>{% endif %}
+                {% if 'elektrikli-aletler' in request.path %}<li class="active"><a href="{% url "category" 'elektrikli-aletler' %}">Elektirikli Aletler</a></li>{% else %}<li><a href="{% url "category" 'elektrikli-aletler' %}">Elektirikli Aletler</a></li>{% endif %}
+                {% if 'sarjli-aletler' in request.path %}<li class="active"><a href="{% url "category" 'sarjli-aletler' %}">Şarjlı Aletler</a></li>{% else %}<li><a href="{% url "category" 'sarjli-aletler' %}">Şarjlı Aletler</a></li>{% endif %}
+                {% if 'bahce-aletleri' in request.path %}<li class="active"><a href="{% url "category" 'bahce-aletleri' %}">Bahçe Ürünleri</a></li>{% else %}<li><a href="{% url "category" 'bahce-aletleri' %}">Bahçe Ürünleri</a></li>{% endif %}
+                {% if 'hobi-aletleri' in request.path %}<li class="active"><a href="{% url "category" 'hobi-aletleri' %}">Hobi Aletleri</a></li>{% else %}<li><a href="{% url "category" 'hobi-aletleri' %}">Hobi Aletleri</a></li>{% endif %}
+                {% if 'matkap' in request.path %}<li class="active"><a href="{% url "altcategory" 'matkap-hilti' %}">Matkap-Hilti</a></li>{% else %}<li><a href="{% url "altcategory" 'matkap-hilti' %}">Matkap-Hilti</a></li>{% endif %}
+                {% if 'hakkimizda' in request.path %}<li class="active"><a href="{% url "about" %}">Hakkımızda</a></li>{% else %}<li><a href="{% url "about" %}">Hakkımızda</a>{% endif %}
+                {% if 'letisim' in request.path %}<li class="active"><a href="{% url "contact" %}">İletişim</a></li>{% else %}<li><a href="{% url "contact" %}">İletişim</a>{% endif %}
+            </ul>
+            <!-- /NAV -->
+        </div>
+        <!-- /responsive-nav -->
+    </div>
+    <!-- /container -->
+</nav>
+<!-- /NAVIGATION -->
